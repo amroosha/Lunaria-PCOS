@@ -136,6 +136,22 @@ in production).
 > Running several instances? The rate limiter is in-memory per instance. Swap
 > `src/lib/rate-limit.ts` for a shared store (e.g. Redis) if you need a global limit.
 
+## Meal photos (if they're missing from a download)
+
+The 27 food photographs for the meal plans live in `public/images/meals/` and
+are referenced by path, so the project **builds and runs even if those `.jpg`
+files are absent** — each photo then falls back to the same image on the Pexels
+CDN. To self-host them again (faster, and no third-party dependency), run:
+
+```bash
+node scripts/fetch-meal-photos.mjs          # downloads any missing photos
+node scripts/fetch-meal-photos.mjs --force  # re-downloads all of them
+```
+
+The script reads the photo list from `src/content/meal-photos.ts`, so there is
+one source of truth. All photos are Pexels photographs (free licence) and each
+meal credits its photographer on the page.
+
 ## Project layout
 
 ```
@@ -148,7 +164,11 @@ src/
     actions/auth.ts          Server Actions: register, login, logout, delete account
     api/chat/route.ts        Secure streaming endpoint → AI provider
     api/conversations/       List / read / delete the signed-in user's conversations
-  components/chat/           ChatApp, MessageBubble, Composer, Sidebar, SetupInstructions
+  components/chat/           ChatApp, ChatDrawer, MessageBubble, Composer, Sidebar, SetupInstructions
+  components/site/           Landing-page sections (Hero, PcosExplainer, SymptomMap, TopicCards, MealPlan, FoodsToAvoid, …)
+  content/                   Editorial content: pcos.ts, meals.ts, meal-photos.ts, site.ts
+public/images/meals/         Meal photographs (restore with scripts/fetch-meal-photos.mjs)
+scripts/fetch-meal-photos.mjs  Downloads missing meal photos from Pexels
   lib/
     config.ts                Reads env vars (server-only), normalizes model IDs, exposes a secret-free public subset
     ai.ts                    Gemini + OpenAI-compatible + Anthropic streaming adapters

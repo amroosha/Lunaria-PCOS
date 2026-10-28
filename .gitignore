@@ -1,0 +1,13 @@
+# dependencies and build output
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Note: .env and .env.local hold secrets (e.g. GEMINI_API_KEY). They are kept
+# out of this list so project downloads include your settings — do not commit
+# them to a public repository.

@@ -1,33 +1,5 @@
-import type { StaticImageData } from "next/image";
 
-import avocadoEggToast from "@/images/meals/breakfast-avocado-egg-toast.jpg";
-import oatsJar from "@/images/meals/breakfast-oats-berries-jar.jpg";
-import omelette from "@/images/meals/breakfast-omelette-toast.jpg";
-import porridge from "@/images/meals/breakfast-porridge-banana-walnuts.jpg";
-import scrambledEggs from "@/images/meals/breakfast-scrambled-eggs-toast.jpg";
-import yoghurtBowl from "@/images/meals/breakfast-yoghurt-berries.jpg";
-import beanChilli from "@/images/meals/dinner-bean-chilli.jpg";
-import chickenStirFry from "@/images/meals/dinner-chicken-stir-fry.jpg";
-import chickenTray from "@/images/meals/dinner-chicken-tray-bake.jpg";
-import fishTacos from "@/images/meals/dinner-fish-tacos.jpg";
-import lentilDal from "@/images/meals/dinner-lentil-dal-rice.jpg";
-import salmon from "@/images/meals/dinner-salmon-roasted-vegetables.jpg";
-import shakshuka from "@/images/meals/dinner-shakshuka.jpg";
-import tofuBroccoli from "@/images/meals/dinner-tofu-broccoli-rice.jpg";
-import vegCurry from "@/images/meals/dinner-vegetable-curry.jpg";
-import vegStirFry from "@/images/meals/dinner-vegetable-stir-fry.jpg";
-import pasta from "@/images/meals/dinner-wholewheat-pasta.jpg";
-import sweetPotato from "@/images/meals/lunch-baked-sweet-potato.jpg";
-import burritoBowl from "@/images/meals/lunch-bean-burrito-bowl.jpg";
-import quinoaSalad from "@/images/meals/lunch-quinoa-chickpea-salad.jpg";
-import riceBeanBowl from "@/images/meals/lunch-rice-bean-bowl.jpg";
-import sandwichSalad from "@/images/meals/lunch-sandwich-salad.jpg";
-import soupBread from "@/images/meals/lunch-vegetable-soup-bread.jpg";
-import veggieWraps from "@/images/meals/lunch-veggie-wraps.jpg";
-import applePeanut from "@/images/meals/snack-apple-peanut-butter-toast.jpg";
-import hummus from "@/images/meals/snack-hummus.jpg";
-import mixedNuts from "@/images/meals/snack-mixed-nuts.jpg";
-
+import { MEAL_PHOTOS, type MealPhoto } from "@/content/meal-photos";
 import type { SourceId } from "@/content/pcos";
 
 /**
@@ -39,7 +11,8 @@ import type { SourceId } from "@/content/pcos";
  * eating tailored to preferences; avoid unduly restrictive diets), the British
  * Dietetic Association food fact sheet and the NHS Eatwell Guide. Nothing here is
  * a prescription: no portion sizes, no calorie targets, no weight-loss framing.
- * Photos are real food photography from Pexels (free licence) and are credited.
+ * Photos are real food photography from Pexels (free licence) and are credited;
+ * see `meal-photos.ts` for how they are stored and restored.
  */
 
 export type MealSlot = "breakfast" | "lunch" | "dinner" | "snack";
@@ -66,7 +39,7 @@ export interface MealOption {
   tip: string;
   vegetarian: boolean;
   tags: MealTag[];
-  image: StaticImageData;
+  image: MealPhoto;
   /** Short, literal description of what the photo shows. */
   alt: string;
   credit: { name: string; url: string };
@@ -84,7 +57,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Frozen blueberries work just as well and cost less. Stir in a spoon of chia or ground flaxseed if you have it.",
     vegetarian: true,
     tags: ["budget", "quick"],
-    image: porridge,
+    image: MEAL_PHOTOS["breakfast-porridge-banana-walnuts"],
     alt: "Bowl of porridge topped with sliced banana, blueberries, walnuts, chia seeds and a dusting of cinnamon.",
     credit: { name: "Cup of Couple", url: "https://www.pexels.com/photo/flat-lay-photography-of-delicious-oatmeal-on-white-ceramic-bowl-7655885/" },
   },
@@ -98,7 +71,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Not a yoghurt person? Porridge made with milk and topped the same way works just as well.",
     vegetarian: true,
     tags: ["quick"],
-    image: yoghurtBowl,
+    image: MEAL_PHOTOS["breakfast-yoghurt-berries"],
     alt: "Bowl of yoghurt topped with blackberries, blueberries, strawberries, granola and fresh mint.",
     credit: { name: "Antoni Shkraba", url: "https://www.pexels.com/photo/strawberries-and-blackberries-in-a-ceramic-bowl-6823332/" },
   },
@@ -112,7 +85,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "No avocado? A spoon of hummus or a drizzle of olive oil does the same job.",
     vegetarian: true,
     tags: ["budget", "quick"],
-    image: scrambledEggs,
+    image: MEAL_PHOTOS["breakfast-scrambled-eggs-toast"],
     alt: "Scrambled eggs on toast with rocket leaves and sliced avocado on a blue plate.",
     credit: { name: "Anthony Rahayel", url: "https://www.pexels.com/photo/scrambled-eggs-and-avocado-on-toast-with-greens-32134464/" },
   },
@@ -126,7 +99,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Add tomatoes or spinach on the side to count towards your five a day.",
     vegetarian: true,
     tags: ["quick"],
-    image: avocadoEggToast,
+    image: MEAL_PHOTOS["breakfast-avocado-egg-toast"],
     alt: "Slice of toast topped with sliced avocado, a poached egg and fresh dill.",
     credit: { name: "Nicola Barts", url: "https://www.pexels.com/photo/bread-with-avocado-7936964/" },
   },
@@ -140,7 +113,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Chia seeds thicken the oats and add plant omega-3s; a spoon of nut butter adds staying power.",
     vegetarian: true,
     tags: ["budget", "batch", "vegan option"],
-    image: oatsJar,
+    image: MEAL_PHOTOS["breakfast-oats-berries-jar"],
     alt: "Glass jar of oats topped with strawberries and blueberries, with raspberries and blueberries scattered around it.",
     credit: { name: "Abdullah", url: "https://www.pexels.com/photo/variety-of-fresh-berries-7752365/" },
   },
@@ -154,7 +127,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Works for lunch or a quick dinner too. Add a little cheese or beans to the filling if you like.",
     vegetarian: true,
     tags: ["budget", "quick"],
-    image: omelette,
+    image: MEAL_PHOTOS["breakfast-omelette-toast"],
     alt: "Folded omelette on a plate with two slices of toast, cucumber, tomato and a floret of broccoli.",
     credit: { name: "Atlantic Ambience", url: "https://www.pexels.com/photo/breakfast-on-a-plate-12944792/" },
   },
@@ -170,7 +143,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Leave out the feta for a vegan version, or add leftover chicken, tofu or a boiled egg.",
     vegetarian: true,
     tags: ["batch", "vegan option"],
-    image: quinoaSalad,
+    image: MEAL_PHOTOS["lunch-quinoa-chickpea-salad"],
     alt: "Plate of quinoa salad with roasted chickpeas, strips of red pepper and crumbled feta.",
     credit: { name: "Mohammed-Ali Hamadache", url: "https://www.pexels.com/photo/healthy-quinoa-salad-with-chickpeas-on-wooden-table-38499046/" },
   },
@@ -184,7 +157,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Frozen mixed vegetables make this even quicker. Stir in spinach or kale at the end.",
     vegetarian: true,
     tags: ["budget", "batch", "vegan option"],
-    image: soupBread,
+    image: MEAL_PHOTOS["lunch-vegetable-soup-bread"],
     alt: "Bowl of chunky vegetable soup with potato, carrot and grains, beside a small bowl of torn crusty bread.",
     credit: { name: "Victor Cayke", url: "https://www.pexels.com/photo/soup-in-a-bowl-served-with-bread-on-the-side-17312402/" },
   },
@@ -198,7 +171,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Add a piece of fruit or a small pot of yoghurt to round it out.",
     vegetarian: true,
     tags: ["budget", "quick"],
-    image: sandwichSalad,
+    image: MEAL_PHOTOS["lunch-sandwich-salad"],
     alt: "Lunchbox of small sandwiches with a green salad and two pots of dressing.",
     credit: { name: "Elly Mar Tamayor", url: "https://www.pexels.com/photo/healthy-lunch-with-sandwiches-and-salad-35482981/" },
   },
@@ -212,7 +185,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Make two and keep one in the fridge for tomorrow — wrap it tightly so it doesn't go soggy.",
     vegetarian: true,
     tags: ["quick", "vegan option"],
-    image: veggieWraps,
+    image: MEAL_PHOTOS["lunch-veggie-wraps"],
     alt: "Tortilla wraps filled with lettuce, cucumber and herbs, sliced in half on a wooden board.",
     credit: { name: "Shameel mukkath", url: "https://www.pexels.com/photo/wraps-on-wooden-board-5112578/" },
   },
@@ -226,7 +199,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "A spoon of plain yoghurt stands in for sour cream; add a handful of rice or a wholemeal tortilla if you want more starch.",
     vegetarian: true,
     tags: ["batch", "vegan option"],
-    image: burritoBowl,
+    image: MEAL_PHOTOS["lunch-bean-burrito-bowl"],
     alt: "Two bowls with black beans, sweetcorn, diced avocado, cubes of cheese and roasted sweet potato.",
     credit: { name: "Alesia Kozik", url: "https://www.pexels.com/photo/cooked-food-on-white-ceramic-plate-6065181/" },
   },
@@ -240,7 +213,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Any beans work — kidney, pinto or chickpeas. Cool leftover rice quickly and keep it in the fridge for no more than a day.",
     vegetarian: true,
     tags: ["budget", "batch", "vegan option"],
-    image: riceBeanBowl,
+    image: MEAL_PHOTOS["lunch-rice-bean-bowl"],
     alt: "Bowl of brown rice with black beans, sweetcorn, roasted sweet potato, lettuce, tomato and red onion.",
     credit: { name: "Heather Brock", url: "https://www.pexels.com/photo/mouthwatering-buddha-bowl-6978234/" },
   },
@@ -254,7 +227,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Microwave the potato for 6–8 minutes first to speed things up. Cottage cheese or hummus works instead of feta.",
     vegetarian: true,
     tags: ["budget"],
-    image: sweetPotato,
+    image: MEAL_PHOTOS["lunch-baked-sweet-potato"],
     alt: "Two baked sweet potatoes split open and topped with crumbled feta, pomegranate seeds and herbs, with salad leaves.",
     credit: { name: "Anthony Rahayel", url: "https://www.pexels.com/photo/delicious-stuffed-sweet-potato-with-feta-and-pomegranate-32127741/" },
   },
@@ -270,7 +243,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Sardines, mackerel or trout are oily fish too, and often cheaper — tinned works fine.",
     vegetarian: false,
     tags: ["oily fish"],
-    image: salmon,
+    image: MEAL_PHOTOS["dinner-salmon-roasted-vegetables"],
     alt: "Grilled salmon fillet topped with diced pepper salsa, served with charred courgette, red pepper, mushrooms and half a lemon.",
     credit: { name: "Cristian Mihaila", url: "https://www.pexels.com/photo/grilled-vegetables-and-fish-served-on-white-plate-14537684/" },
   },
@@ -284,7 +257,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Make a double batch — dal reheats well and freezes for a month.",
     vegetarian: true,
     tags: ["budget", "batch", "vegan option"],
-    image: lentilDal,
+    image: MEAL_PHOTOS["dinner-lentil-dal-rice"],
     alt: "Bowl of lentil curry with chickpeas, pistachios, sesame seeds and coriander, served with rice.",
     credit: { name: "Alesia Kozik", url: "https://www.pexels.com/photo/food-healthy-lunch-meal-6544376/" },
   },
@@ -298,7 +271,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "A bag of frozen stir-fry vegetables is a perfectly good shortcut.",
     vegetarian: true,
     tags: ["quick", "vegan option"],
-    image: vegStirFry,
+    image: MEAL_PHOTOS["dinner-vegetable-stir-fry"],
     alt: "Bowl of stir-fried broccoli, cauliflower, mushrooms and peppers over rice, with chopsticks resting on the rim.",
     credit: { name: "Skyler Ewing", url: "https://www.pexels.com/photo/rice-bowl-with-mixed-vegetable-toppings-10695966/" },
   },
@@ -312,7 +285,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Swap the chicken for tofu, prawns or a tin of drained chickpeas.",
     vegetarian: false,
     tags: ["quick"],
-    image: chickenStirFry,
+    image: MEAL_PHOTOS["dinner-chicken-stir-fry"],
     alt: "Ceramic bowl of chicken and mushroom stir-fry with spring onion served over rice.",
     credit: { name: "Nadin Sh", url: "https://www.pexels.com/photo/a-bowl-of-chicken-and-rice-24738520/" },
   },
@@ -326,7 +299,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Add lean mince if you like, or keep it all-bean. Freeze portions for busy nights.",
     vegetarian: true,
     tags: ["budget", "batch", "vegan option"],
-    image: beanChilli,
+    image: MEAL_PHOTOS["dinner-bean-chilli"],
     alt: "Bowl of bean chilli topped with sliced avocado, cheese and red cabbage, with a folded tortilla on the side.",
     credit: { name: "Magda Ehlers", url: "https://www.pexels.com/photo/hearty-mexican-chili-with-tortilla-and-avocado-32667184/" },
   },
@@ -340,7 +313,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Frozen peas and mixed veg are ideal here. Leftovers make a good lunch with a wholemeal wrap.",
     vegetarian: true,
     tags: ["budget", "batch", "vegan option"],
-    image: vegCurry,
+    image: MEAL_PHOTOS["dinner-vegetable-curry"],
     alt: "Plate of mild vegetable curry with potato, carrot and peas next to white rice, with a wooden spoon.",
     credit: { name: "Cats Coming", url: "https://www.pexels.com/photo/cooked-rice-and-curry-food-served-on-white-plate-674574/" },
   },
@@ -354,7 +327,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Press the tofu for ten minutes first so it crisps up. Cashew or tahini sauce works too.",
     vegetarian: true,
     tags: ["quick", "vegan option"],
-    image: tofuBroccoli,
+    image: MEAL_PHOTOS["dinner-tofu-broccoli-rice"],
     alt: "Two bowls of crispy tofu cubes and broccoli in a creamy sauce served over rice.",
     credit: { name: "Alesia Kozik", url: "https://www.pexels.com/photo/close-up-photo-of-food-in-a-bowl-6120241/" },
   },
@@ -368,7 +341,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Ordinary pasta is fine if you prefer it — the beans and vegetables matter more than the type of pasta.",
     vegetarian: true,
     tags: ["quick"],
-    image: pasta,
+    image: MEAL_PHOTOS["dinner-wholewheat-pasta"],
     alt: "Plate of wholewheat spaghetti with wilted spinach, halved cherry tomatoes and crumbled feta, twirled on a fork.",
     credit: { name: "Lisa Fotios", url: "https://www.pexels.com/photo/selective-focus-photography-of-pasta-with-tomato-and-basil-1279330/" },
   },
@@ -382,7 +355,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Frozen fish fillets keep the cost down. Make it vegetarian with spiced black beans or roasted cauliflower.",
     vegetarian: false,
     tags: ["quick"],
-    image: fishTacos,
+    image: MEAL_PHOTOS["dinner-fish-tacos"],
     alt: "Three fish tacos in crisp shells with a creamy dressing and herbs, beside a bowl of red cabbage slaw.",
     credit: { name: "Shameel mukkath", url: "https://www.pexels.com/photo/top-view-of-a-plate-with-tacos-and-red-cabbage-salad-10296421/" },
   },
@@ -396,7 +369,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Use the same tray method with chickpeas and halloumi or tofu for a vegetarian version.",
     vegetarian: false,
     tags: ["batch"],
-    image: chickenTray,
+    image: MEAL_PHOTOS["dinner-chicken-tray-bake"],
     alt: "Whole roast chicken in a roasting tin with courgette, peppers and potatoes, being basted with a spoon.",
     credit: { name: "Lionel Ntasano", url: "https://www.pexels.com/photo/baked-chicken-with-roasted-vegetables-in-kitchen-37100056/" },
   },
@@ -410,7 +383,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Stir a tin of chickpeas or butter beans into the sauce for extra protein and fibre; add feta if you like.",
     vegetarian: true,
     tags: ["budget", "quick"],
-    image: shakshuka,
+    image: MEAL_PHOTOS["dinner-shakshuka"],
     alt: "Frying pan of shakshuka: eggs cooked in a chunky tomato and pepper sauce, sprinkled with herbs.",
     credit: { name: "Jahra Tasfia Reza", url: "https://www.pexels.com/photo/delicious-shakshuka-with-poached-eggs-in-pan-39833278/" },
   },
@@ -426,7 +399,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Any nut or seed butter works, and so does a small handful of nuts with the fruit.",
     vegetarian: true,
     tags: ["budget", "quick", "vegan option"],
-    image: applePeanut,
+    image: MEAL_PHOTOS["snack-apple-peanut-butter-toast"],
     alt: "Slices of wholegrain toast with peanut butter next to two green apples and a jar of peanut butter.",
     credit: { name: "Denis Liendo", url: "https://www.pexels.com/photo/bread-with-peanut-butter-and-apples-11405133/" },
   },
@@ -440,7 +413,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Cottage cheese, a boiled egg or a small pot of plain yoghurt are equally good protein-rich options.",
     vegetarian: true,
     tags: ["quick", "vegan option"],
-    image: hummus,
+    image: MEAL_PHOTOS["snack-hummus"],
     alt: "Three small bowls of hummus topped with whole chickpeas, olive oil and fresh herbs.",
     credit: { name: "Nataliya Vaitkevich", url: "https://www.pexels.com/photo/close-up-shot-of-hummus-on-bowls-6252676/" },
   },
@@ -454,7 +427,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Buy nuts in larger bags and portion them into small pots for the week — much cheaper than snack packs.",
     vegetarian: true,
     tags: ["quick", "vegan option"],
-    image: mixedNuts,
+    image: MEAL_PHOTOS["snack-mixed-nuts"],
     alt: "Dark bowl filled with mixed nuts, including almonds, cashews, hazelnuts and pecans.",
     credit: { name: "Engin Akyurt", url: "https://www.pexels.com/photo/flatlay-of-assorted-nuts-on-black-bowl-5472169/" },
   },
@@ -468,7 +441,7 @@ export const MEAL_OPTIONS: MealOption[] = [
     tip: "Soya yoghurt is the closest plant-based swap for protein. Frozen berries thaw by mid-morning.",
     vegetarian: true,
     tags: ["quick", "vegan option"],
-    image: yoghurtBowl,
+    image: MEAL_PHOTOS["breakfast-yoghurt-berries"],
     alt: "Bowl of yoghurt topped with blackberries, blueberries, strawberries, granola and fresh mint.",
     credit: { name: "Antoni Shkraba", url: "https://www.pexels.com/photo/strawberries-and-blackberries-in-a-ceramic-bowl-6823332/" },
   },

@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 
 import { Reveal } from "@/components/motion/Reveal";
 import { AskButton } from "@/components/site/AskButton";
+import { MealPhoto } from "@/components/site/MealPhoto";
 import { SectionHeading, SourceLinks } from "@/components/site/SourceLinks";
 import {
   DAY_NAMES,
@@ -66,7 +66,7 @@ function MealCard({
       }`}
     >
       <figure className={`relative m-0 aspect-[4/3] w-full overflow-hidden rounded-[1.25rem] bg-cream-200 ${photoOnRight ? "md:order-2" : ""}`}>
-        <Image key={meal.id} src={meal.image} alt={meal.alt} fill sizes={PHOTO_SIZES} placeholder="blur" quality={75} className="object-cover" />
+        <MealPhoto key={meal.image.src} photo={meal.image} alt={meal.alt} sizes={PHOTO_SIZES} />
       </figure>
 
       <div className="flex min-w-0 flex-col px-2 pb-2 sm:px-3 sm:pb-3 md:py-1">
