@@ -1,4 +1,4 @@
-# Lunaria — PCOS education with a private, one-to-one AI chat
+# Lunaria ♦ PCOS education with a private, one-to-one AI chat
 
 A modern website with a calm, welcoming AI chatbot. Every visitor gets their own
 separate conversation; there are no rooms, member lists, or shareable links. AI
@@ -140,7 +140,7 @@ in production).
 
 The 27 food photographs for the meal plans live in `public/images/meals/` and
 are referenced by path, so the project **builds and runs even if those `.jpg`
-files are absent** — each photo then falls back to the same image on the Pexels
+files are absent** each photo then falls back to the same image on the Pexels
 CDN. To self-host them again (faster, and no third-party dependency), run:
 
 ```bash
