@@ -2,8 +2,8 @@
 
 A modern website with a calm, welcoming AI chatbot. Every visitor gets their own
 separate conversation; there are no rooms, member lists, or shareable links. AI
-provider keys live only on the server, and nothing is stored unless you — the
-site owner — explicitly turn on private chat history.
+provider keys live only on the server, and nothing is stored unless you the
+site owner explicitly turn on private chat history.
 
 Built with Next.js (App Router), React, Tailwind CSS, Drizzle ORM and PostgreSQL.
 
@@ -19,7 +19,7 @@ Built with Next.js (App Router), React, Tailwind CSS, Drizzle ORM and PostgreSQL
   one click away.
 - Secure server endpoint (`POST /api/chat`) that forwards the conversation to the
   AI model, keeps each conversation's context separate, and rate-limits abuse.
-- Clear setup instructions are shown in the chat when no AI key is configured —
+- Clear setup instructions are shown in the chat when no AI key is configured
   the bot never pretends to work.
 - A short, plain-language privacy notice at `/privacy`.
 
@@ -65,7 +65,7 @@ Optional settings:
 | Variable            | Purpose                                                                 |
 | ------------------- | ----------------------------------------------------------------------- |
 | `AI_MODEL`          | Override the model id (e.g. `gemini-2.5-pro`, `gpt-4.1`, `claude-sonnet-4-5`). |
-| `AI_PROVIDER`       | `gemini`, `openai` or `anthropic` — only needed if several keys are set. |
+| `AI_PROVIDER`       | `gemini`, `openai` or `anthropic`  only needed if several keys are set. |
 | `OPENAI_BASE_URL`   | Point at any OpenAI-compatible API (Groq, Mistral, OpenRouter, Ollama). |
 | `GEMINI_BASE_URL`   | Only for proxies; defaults to `https://generativelanguage.googleapis.com`. |
 | `AI_SYSTEM_PROMPT`  | Customize the assistant's personality.                                  |
@@ -79,7 +79,7 @@ switches from **Setup needed** to **Connected**.
   (`GOOGLE_API_KEY` / `GOOGLE_GENERATIVE_AI_API_KEY` are accepted as aliases).
 - The server calls the native API:
   `POST https://generativelanguage.googleapis.com/v1beta/models/<AI_MODEL>:streamGenerateContent?alt=sse`
-  with the key in the `x-goog-api-key` header — never in a URL or in browser code.
+  with the key in the `x-goog-api-key` header never in a URL or in browser code.
 - Leave `AI_MODEL` unset and the server chooses automatically: it prefers Google's
   current recommendation (`gemini-3.8-flash`), checks it against the models your key
   lists, and if Google rejects a model as retired it switches to another one and
